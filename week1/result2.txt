@@ -1,0 +1,22 @@
+osep@josep-VirtualBox:~/Desktop$ gcc hello_vdiasat.c -o hello_vdiasat
+josep@josep-VirtualBox:~/Desktop$ ./hello_vdiasat
+Hello Vdiasat
+josep@josep-VirtualBox:~/Desktop$ 
+
+josep@josep-VirtualBox:~/Desktop$ gcc sum1_N.c -o sum1_N
+josep@josep-VirtualBox:~/Desktop$ ./sum1_N
+Enter Max number sum series: 4
+Sum of first 4 numbers               = 10 
+Sum of first 4 numbers using formula = 10 
+ josep@josep-VirtualBox:~/Desktop$ 
+
+
+josep@josep-VirtualBox:~/Desktop$ ./matrix_mul
+Matrix Mult Result:
+1 2 3 4 
+5 6 7 8 
+9 10 11 12 
+13 14 15 16 
+josep@josep-VirtualBox:~/Desktop$ 
+
+
