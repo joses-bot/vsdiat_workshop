@@ -14,8 +14,8 @@
 #define ADC_CHANNELS 8
 
 /* GPIO bits */
-const int ON   1;   
-const int OFF  0;   
+const int ON =  1;   
+const int OFF = 0;   
 
 /* Define idle time for next check (3 seconds) */
 #define IDLE_TIME 3
@@ -46,7 +46,7 @@ int busy;
 
   /* If the soil moisture is HIGH, report everything as perfect! */
   if (moisture_level <= MOISTURE_LOW) {
-     printf("\n"Low moisture! Time to water! \n");
+     printf("\nLow moisture! Time to water! \n");
    
      do {
         setmosfet(ON);
@@ -56,7 +56,6 @@ int busy;
      }
      while( !((water_level >= LVL_LOW) && (water_level <= LVL_HIGH)));  /* Wait until water level is in range */
      }
-  }
   else {
        printf("\nEverything OK, The water pump is on standby \n");
        delay_val(IDLE_TIME);
@@ -73,7 +72,7 @@ int mask = 0x7FFFFFFF;  /* Bit 31 */
         "and x30, x30, %1\n\t"
         "or x30, x30, %0\n\t"
         :
-        : "r"(convst), "r"(mask1)
+        : "r"(convst), "r"(mask)
         : "x30"
     );
 
@@ -86,7 +85,7 @@ int mask = 0xBFFFFFFF;  /* Bit 30 */
         "and x30, x30, %1\n\t"
         "or x30, x30, %0\n\t"
         :
-        : "r"(convst), "r"(mask1)
+        : "r"(convstrd), "r"(mask)
         : "x30"
     );
 
@@ -99,7 +98,7 @@ int mask = 0xEFFFFFFF;  /* Bit 28 */
         "and x30, x30, %1\n\t"
         "or x30, x30,  %1\n\t"
         :
-        : "r"(mosfet_val), "r"(mask1)
+        : "r"(mosfet_val), "r"(mask)
         : "x30"
     );
 
