@@ -1,11 +1,20 @@
-### RISC-V Course
-    • https://www.vlsisystemdesign.com/hdp_riscv/ 
-    • Understanding RISC-V 
-    • Overall design
-    • C code implementation 
-    • Verification of C code via compilers
-    • Using ChipCron Tool to desgin SoC’s
-    • Writing Testbenches 
-    • Verification and simulation 
+####  BASIC ALU IN C
 
-<img width="600" alt="alu_execution" src="https://github.com/joses-bot/vsdiat_workshop/assets/83429049/e8201ca0-977f-4018-967d-110ddc8e7c98">
+
+![alu_compile](https://github.com/joses-bot/jose_vdiasat_workshop/assets/83429049/099e22e3-e4d1-4227-a412-25feea8f6d8b)
+
+####  ALU TEST
+
+Basic ALU
+
+SUM 10  10  = 20
+
+SUBS 10  10  = 0
+
+MUL 10  10  = 100
+
+DIV 10  10  = 1
+
+AND 10  10  = 10
+
+OR 10  10  = 10
