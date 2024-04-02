@@ -1,1 +1,0 @@
-Self Watering System - Soil Moisture Sensor - Water level sensor - Water pump actuator activated by a MOSFET swtich. This project wil try to build a self-watering system. The project includes the processor with interfaces for the water level sensor and the soil moisture sensor value and runs the system within a specified time interval, and the self-watering process is executed.
