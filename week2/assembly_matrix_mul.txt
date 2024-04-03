@@ -1,5 +1,5 @@
 
-output.o:     file format elf32-littleriscv
+maatrix_mul.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text:

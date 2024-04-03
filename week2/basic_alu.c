@@ -7,23 +7,23 @@ int main()
 int ii,jj;
 int result;
 
-//printf("\nBasic ALU\n");
+printf("\nBasic ALU\n");
 
-for (ii = 10; ii <15; ii++)
-for (jj = 10; jj <15; jj++)
+for (ii = 10; ii <11; ii++)
+for (jj =  8; jj <9; jj++)
 {
 result = alu(ii,jj,0);
-///printf("\nSUM %d  %d  = %d\n",ii,jj, result);
+printf("\nSUM %d  %d  = %d\n",ii,jj, result);
 result = alu(ii,jj,1);
-//printf("\nSUBS %d  %d  = %d\n",ii,jj, result);
+printf("\nSUBS %d  %d  = %d\n",ii,jj, result);
 result = alu(ii,jj,2);
-//printf("\nMUL %d  %d  = %d\n",ii,jj, result);
+printf("\nMUL %d  %d  = %d\n",ii,jj, result);
 result = alu(ii,jj,3);
-//printf("\nDIV %d  %d  = %d\n",ii,jj, result);
+printf("\nDIV %d  %d  = %d\n",ii,jj, result);
 result = alu(ii,jj,4);
-//printf("\nAND %d  %d  = %d\n",ii,jj, result);
+printf("\nAND %d  %d  = %d\n",ii,jj, result);
 result = alu(ii,jj,5);
-//printf("\nOR %d  %d  = %d\n",ii,jj, result);
+printf("\nOR %d  %d  = %d\n",ii,jj, result);
 }
 
 return 0;
@@ -45,11 +45,11 @@ switch (instruction_type) {
         break;
 
   case 2: 
-       result = operandA || operandB;
+       result = operandA * operandB;
         break;
 
   case 3: 
-       result = operandA && operandB;
+       result = operandA / operandB;
        break;
 
   case 4: 
