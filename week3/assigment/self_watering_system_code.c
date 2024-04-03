@@ -15,7 +15,15 @@
 
 /* GPIO bits */
 const int ON =  1;   
-const int OFF = 0;   
+const int OFF = 0; 
+const int MOSFET_ON  = 0x10000000;  
+const int MOSFET_OFF = 0x00000000; 
+const int BUSY_ON    = 0x20000000;  
+const int BUSY_OFF   = 0x00000000; 
+const int RD_ON      = 0x40000000;  
+const int RD_OFF     = 0x00000000;  
+const int CONV_ON    = 0x80000000;  
+const int CONV_OFF   = 0x00000000;   
 
 /* Define idle time for next check (3 seconds) */
 #define IDLE_TIME 3
@@ -32,14 +40,19 @@ void full_adc_conversion();
 int moisture_level;
 int water_level;
 
+/*Just for simulation*/
+int write_busy(int busy_val);
+int initialize_x30();
+
 int main() {
 
 int busy;
 
   /* Initially keep motor OFF - ADC Converter RD signal to 0 */
-  setmosfet(OFF);
-  convst_rd(OFF);
-  setconvst(ON);
+  printf("\nSystem start - Water Pump motor off - ADC initialized\n");
+  setmosfet(MOSFET_OFF);
+  convst_rd(RD_OFF);
+  setconvst(CONV_ON);
 
   while(1){
 
@@ -49,9 +62,12 @@ int busy;
      printf("\nLow moisture! Time to water! \n");
    
      do {
-        setmosfet(ON);
+        printf("\nCheck water level = %d (Must be within %d and %d)\n", water_level, LVL_LOW, LVL_HIGH );
+        setmosfet(MOSFET_ON);
+        printf("\nWater level low - Water Pump swtich ON for a short time\n");
         delay_val(PUMP_TIME);  /*Keep the pump active for some short time */
-        setmosfet(OFF);
+        printf("\nWater Pump swtich OFF\n");
+        setmosfet(MOSFET_OFF);
         full_adc_conversion(); /* Get new values */
      }
      while( !((water_level >= LVL_LOW) && (water_level <= LVL_HIGH)));  /* Wait until water level is in range */
@@ -96,12 +112,25 @@ int mask = 0xEFFFFFFF;  /* Bit 28 */
 
     asm volatile(
         "and x30, x30, %1\n\t"
-        "or x30, x30,  %1\n\t"
+        "or x30, x30,  %0\n\t"
         :
         : "r"(mosfet_val), "r"(mask)
         : "x30"
     );
 
+}
+
+
+int write_busy(int busy_val){
+int mask = 0xDFFFFFFF;  /* Bit 29 */
+
+    asm volatile(
+        "and x30, x30, %1\n\t"
+        "or x30, x30,  %0\n\t"
+        :
+        : "r"(busy_val), "r"(mask)
+        : "x30"
+    );
 }
 
 int read_busy(){
@@ -140,30 +169,32 @@ asm ("nop");
 
 void full_adc_conversion(){
   int jj;
+  int conv_done;
 
-  setconvst(ON);
-  setconvst(OFF);  /* Transition to low starts conversion */
-  setconvst(ON);
+  setconvst(CONV_ON);
+  setconvst(CONV_OFF);  /* Transition to low starts conversion */
+  setconvst(CONV_ON);
 
   do {
     asm ("nop");
-  }
-  while (read_busy() == ON);  /* Wait until conversion ends */
+  }  while ((conv_done = read_busy()) == ON);  /* Wait until conversion ends */
 
   for (jj = 0; jj < ADC_CHANNELS ; jj ++){
     if(jj == 0){
-       convst_rd(ON);
+       convst_rd(RD_ON);
        moisture_level = read_adc_val();  /* Read soil moisture level (global variable) */ 
-       convst_rd(OFF);
+       convst_rd(RD_OFF);
+       printf("\nRead soild moisture level = %d\n", moisture_level);
     }
     else if(jj == 1){
-       convst_rd(ON);
+       convst_rd(RD_ON);
        water_level = read_adc_val();  /* Read water level  (global variable) */
-       convst_rd(OFF);
+       convst_rd(RD_OFF);
+       printf("\nRead water level = %d\n", water_level);
     }      
     else  {
-       convst_rd(ON);    /* Dummhy reads */
-       convst_rd(OFF);
+       convst_rd(RD_ON);    /* Dummhy reads */
+       convst_rd(RD_OFF);
    }    
    }
 }
