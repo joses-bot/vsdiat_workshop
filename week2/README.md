@@ -1,179 +1,166 @@
 ## Assignment
+
 + Verify all the c code (counter, matrix multiplication, ALU code using RISC-V compiler and spike output.
 + Measure CPU performance of all the programs mentioned above using either godbolt or RISC-V disassembler.
-## Assignment 1
 + Verify all the c code (counter, matrix multiplication, ALU code using RISC-V compiler and spike output.
-  ### Commands
+
+## Commands to compile code using riscv compiler
+
+riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding  -o output file.c
+
+## Code for Counter.C (count number of digits of number)
+
   ```
-  riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding -o ./Counter.o Counter.c
-  spike pk Counter.o
+  riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding -o ./counter counter.c
+  spike pk counter
   
   ```
 ## Code for Counter.C
 ```
 #include <stdio.h>
-#include <time.h>
+int main() {
+  int nn, pp;
+  int counter = 0;
+  printf("\nEnter an integer: ");
+  scanf("%d", &nn);
 
-void delay(int n) {
-    int us = n; // microseconds
-    clock_t start_time = clock();
-    while (clock() < start_time + (us * CLOCKS_PER_SEC / 1000000));
+  nn = 5;
+pp = nn;
+ 
+  do {
+    nn = nn -1;
+    ++counter;
+  } while (nn != 0);
+
+  printf("\nNumber of digits of integer %d is: %d\n", pp, counter);
 }
 
-void display(int count) // Function to display the data on the four Led's
-{
-	printf("Count value is: %d\n", count);						
-}
-
-int main()
-{
-	int count = 0x00000000;
-	while (1)
-	{
-		display(count);
-		count++;
-        if(count==16){
-            count=0;
-        }
-		delay(500000);   // delay by 0.5 microseconds
-	}
-}
 ```
-### Spike Simulation
-![Spike Simulation Counter](https://github.com/eceelango/RISC-V_HDP/assets/65966247/1e997a6e-569e-453b-b0b3-f04ef53ef557)
+![image](https://github.com/joses-bot/jose_vdiasat_workshop/assets/83429049/ba70d501-3f00-4a15-9910-bc5cbc6c4f0e)
 
 ## Code for Matrix Multiplication.C
 ```
-// C program to multiply two matrices
-
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
-// Edit MACROs here, according to your Matrix Dimensions for
-// mat1[R1][C1] and mat2[R2][C2]
-#define R1 2 // number of rows in Matrix-1
-#define C1 2 // number of columns in Matrix-1
-#define R2 2 // number of rows in Matrix-2
-#define C2 2 // number of columns in Matrix-2
+int main() {
+    int array1[4][4]  = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+    int array2[4][4]  = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+    int mresult[4][4] = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+    int ii,jj,kk;
 
-void mulMat(int mat1[][C1], int mat2[][C2])
-{
-	int rslt[R1][C2];
+    for (ii = 0; ii < 4; ii++) {
+        for (jj = 0; jj < 4; jj++) {
+            for (kk = 0; kk < 4; kk++) {
+                mresult[ii][jj] = mresult[ii][jj] + array1[ii][kk] * array2[kk][jj];
+            }
+        }
+    }
 
-	printf("Multiplication of given two matrices is:\n");
+    printf("Matrix Array1:\n");
+    for (ii = 0; ii < 4; ii++) {
+        for (jj = 0; jj < 4; jj++) {
+            printf("%d ", array1[ii][jj]);
+        }
+        printf("\n");
+    }
+    printf("Matrix Array2:\n");
+    for (ii = 0; ii < 4; ii++) {
+        for (jj = 0; jj < 4; jj++) {
+            printf("%d ", array2[ii][jj]);
+        }
+        printf("\n");
+    }
 
-    clock_t start_time, end_time;
+    printf("Matrix Mult Result:\n");
+    for (ii = 0; ii < 4; ii++) {
+        for (jj = 0; jj < 4; jj++) {
+            printf("%d ", mresult[ii][jj]);
+        }
+        printf("\n");
+    }
 
-    start_time = clock() ; 
-
-	for (int i = 0; i < R1; i++) {
-		for (int j = 0; j < C2; j++) {
-			rslt[i][j] = 0;
-
-			for (int k = 0; k < R2; k++) {
-				rslt[i][j] += mat1[i][k] * mat2[k][j];
-			}
-
-			printf("%d\t", rslt[i][j]);
-		}
-
-		printf("\n");
-	}
-
-    end_time = clock() ; 
-    printf("Total time taken in seconds %d:\n", end_time - start_time);
-
+    return 0;
 }
 
-// Driver code
-int main()
-{
-	// R1 = 4, C1 = 4 and R2 = 4, C2 = 4 (Update these
-	// values in MACROs)
-	int mat1[R1][C1] = { { 1, 1 },
-						{ 2, 2 } };
-
-	int mat2[R2][C2] = { { 1, 1 },
-						{ 2, 2 } };
-
-
-	if (C1 != R2) {
-		printf("The number of columns in Matrix-1 must be "
-			"equal to the number of rows in "
-			"Matrix-2\n");
-		printf("Please update MACROs value according to "
-			"your array dimension in "
-			"#define section\n");
-
-		exit(EXIT_FAILURE);
-	}
-
-	// Function call
-	mulMat(mat1, mat2);
-
-	return 0;
-}
 
 ```
 ### Spike Simulation
-![Spike_Simulation_Matrixmul](https://github.com/eceelango/RISC-V_HDP/assets/65966247/ff5a954b-b23b-4d5a-b45a-da3f447ed51d)
+![image](https://github.com/joses-bot/jose_vdiasat_workshop/assets/83429049/926c2582-c434-4438-a610-349528681977)
 
 ## Code for ALU.C                        
 ```
-#include<stdio.h>
-int main() {
+#include <stdio.h>
 
-int a,b,result ; // introducting a,b, result as integers
-char op;  // Operation
-printf("Enter two numbers:"); //printing and scanning the numbers
-scanf("%d %d", &a, &b);
+int alu(int operandA, int operandB, int instruction_type) ;
 
-printf("Enter the operation from ADD, SUB, MUL, DIV, OR, AND, XOR : "); //printing what operation is to be done
-scanf(" %c", &op);
+int main()
+{
+int ii,jj;
+int result;
 
-switch(op) {
- case '+': // Addition
-   result = a + b; 
-  break;
- 
- case '-': // Subtraction
-    result = a - b;
-  break;
+printf("\nBasic ALU\n");
 
- case '*': // Multiplication
-    result = a * b;
-  break;
-
- case '/': // Division
-    result = a / b;
-  break;
-
- case '|': // OR
-   result = a | b;
-  break;
-
- case '&': // AND
-   result = a & b;
-  break;
-
- case '^': // XOR
-   result = a ^ b;
-  break;
-
- default: // If others, wrong operation will be generated
-   printf("Wrong operation");
-   return 1;
+for (ii = 10; ii <11; ii++)
+for (jj =  8; jj <9; jj++)
+{
+result = alu(ii,jj,0);
+printf("\nSUM %d  %d  = %d\n",ii,jj, result);
+result = alu(ii,jj,1);
+printf("\nSUBS %d  %d  = %d\n",ii,jj, result);
+result = alu(ii,jj,2);
+printf("\nMUL %d  %d  = %d\n",ii,jj, result);
+result = alu(ii,jj,3);
+printf("\nDIV %d  %d  = %d\n",ii,jj, result);
+result = alu(ii,jj,4);
+printf("\nAND %d  %d  = %d\n",ii,jj, result);
+result = alu(ii,jj,5);
+printf("\nOR %d  %d  = %d\n",ii,jj, result);
 }
-
-printf("Result is: %d", result); // Printing the result
 
 return 0;
+}
+
+
+int alu(int operandA, int operandB, int instruction_type) 
+{
+
+int result;
+
+switch (instruction_type) {
+  case 0: 
+       result = operandA + operandB;
+       break;
+
+  case 1: 
+       result = operandA - operandB;
+        break;
+
+  case 2: 
+       result = operandA * operandB;
+        break;
+
+  case 3: 
+       result = operandA / operandB;
+       break;
+
+  case 4: 
+       result = operandA & operandB;
+       break;
+
+  case 5: 
+       result = operandA | operandB;
+       break;
 
 }
+
+
+return (result);
+}
+
 ```
 ### Spike Simulation
-![Spike Output Alu](https://github.com/eceelango/RISC-V_HDP/assets/65966247/598f3e02-8e36-499c-89e4-5a38d83b3c8c)
+
+![image](https://github.com/joses-bot/jose_vdiasat_workshop/assets/83429049/85bdd81b-e62c-4169-bd0b-0f959ff549c6)
 
 
 ## Assignment 2
@@ -181,120 +168,127 @@ return 0;
 
   ### Command
   ```
-  riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -o ./Counter.o Counter.c
-  riscv64-unknown-elf-objdump -d -r Counter.o > Counter_assembly.txt
+  riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -o  output file.c
+  riscv64-unknown-elf-objdump -d -r output > file_assembly.txt
   ```
 
 Let us assume the number of clock cycles for the RISC-V instructions.
 
-Instructions associated with add : 2 cycles.
+Instructions with add                                             : 2 cycles.
 
-Instructions associated with  mul, div, load, store, and move: 3 cycles.
+Instructions with  mul, div, load, store, and move : 3 cycles.
 
-Instructions associated with jump, and branch: 4 cycles.
+Instructions with jump, and branch                       : 4 cycles.
 
-All other Instructions: 2 cycles.
+All other Instructions                                             : 2 cycles.
 
 **# Counter**
 
-**CPU performance**
+**CPU performance - Portion of code**
 ```
-addi	sp,sp,-32 -> 2 cycles
-sd	ra,24(sp) -> 3 cycles
-sd	s0,16(sp) -> 3 cycles
-addi	s0,sp,32 -> 2 cycles
-sw	zero,-20(s0) -> 3 cycles 
-```
-Clock cycle per instruction (CPI) = Total number of clock cycles / Number of instructions
+counter.o:     file format elf32-littleriscv
 
-So, CPI will be 13 / 5 = 2.6.
 
-Now,  CPU time = CPI x Number of instructions for a program x Clock cycle time (T)
+Disassembly of section .text:
 
-Let's assume, T = 100ps.
-
-So, CPU time = 2.6 x 5 x 100ps = 2600ps or 1.3ns.
-
-**# Matrix Multiplication**
-
-**CPU performance**
-```
-addi	sp,sp,-80 -> 2 cycles
-sd	ra,72(sp) -> 3 cycles
-sd	s0,64(sp) -> 3 cycles
-addi	s0,sp,80 -> 2 cycles
-sd	a0,-72(s0) -> 3 cycles
-sd	a1,-80(s0) -> 3 cycles
-lui	a5,%hi(.LC2) -> 3 cycles
-addi	a0,a5,%lo(.LC2) -> 2 cycles
-call	puts -> 2 cycles
-call	clock -> 2 cycles
-sd	a0,-40(s0) -> 3 cycles
-sw	zero,-20(s0) -> 3 cycles
-j	.L2 -> 3 cycles
+00010054 <main>:
+   10054:	fe010113          	addi	sp,sp,-32  -> 2
+   10058:	00812e23          	sw	s0,28(sp)          -> 3
+   1005c:	02010413          	addi	s0,sp,32   -> 2
+   10060:	fe042423          	sw	zero,-24(s0)     -> 3
+   10064:	00500793          	li	a5,5                 -> 3
+   10068:	fef42623          	sw	a5,-20(s0)        -> 3
+   1006c:	fec42783          	lw	a5,-20(s0)        -> 3
+   10070:	fef42223          	sw	a5,-28(s0)        -> 3
+   10074:	fec42783          	lw	a5,-20(s0)        -> 3
+   10078:	fff78793          	addi	a5,a5,-1   -> 2
+   1007c:	fef42623          	sw	a5,-20(s0)        -> 3
+   10080:	fe842783          	lw	a5,-24(s0)        -> 3
+   10084:	00178793          	addi	a5,a5,1    -> 2
+   
 ```
 Clock cycle per instruction (CPI) = Total number of clock cycles / Number of instructions
 
-So, CPI will be 34/ 13 = 2.615.
+So, CPI will be 35/ 13 = 2.69.
 
 Now,  CPU time = CPI x Number of instructions for a program x Clock cycle time (T)
 
-Let's assume, T = 100ps.
+Let's assume, T = 80ps.
 
-So, CPU time = 2.615 x 13 x 100ps = 3399ps or 3.399 ns.
+So, CPU time = 2.69 x 13 x 80ps = 2798ps ~ 2.8ns.
 
-**# ALU**
+**# Matrix Multiplication - Portion of code**
 
 **CPU performance**
 ```
-addi	sp,sp,-32 -> 2 cycles
-sd	ra,24(sp)  -> 3 cycles
-sd	s0,16(sp)  -> 3 cycles
-addi	s0,sp,32  -> 2 cycles
-lui	a5,%hi(.LC0)  -> 3 cycles
-addi	a0,a5,%lo(.LC0)  -> 2 cycles
-call	printf  -> 2 cycles
-addi	a4,s0,-28  -> 2 cycles
-addi	a5,s0,-24  -> 2 cycles
-mv	a2,a4  -> 3 cycles
-mv	a1,a5  -> 3 cycles
-lui	a5,%hi(.LC1)  -> 3 cycles
-addi	a0,a5,%lo(.LC1)  -> 2 cycles
-call	scanf  -> 2 cycles
-lui	a5,%hi(.LC2)  -> 3 cycles
-addi	a0,a5,%lo(.LC2)  -> 2 cycles
-call	printf  -> 2 cycles
-addi	a5,s0,-29  -> 2 cycles
-mv	a1,a5  -> 3 cycles
-lui	a5,%hi(.LC3)  -> 3 cycles
-addi	a0,a5,%lo(.LC3)  -> 2 cycles
-call	scanf  -> 2 cycles
-lbu	a5,-29(s0)  -> 3 cycles
-sext.w	a5,a5  -> 2 cycles
-mv	a3,a5  -> 3 cycles
-li	a4,45  -> 3 cycles
-beq	a3,a4,.L2  -> 4 cycles
-mv	a3,a5  -> 3 cycles
-li	a4,45  -> 3 cycles
-bgt	a3,a4,.L3  -> 4 cycles
-mv	a3,a5  -> 3 cycles
-li	a4,42  -> 3 cycles
-beq	a3,a4,.L4  -> 4 cycles
-mv	a3,a5  -> 3 cycles
-li	a4,43  -> 3 cycles
-beq	a3,a4,.L5  -> 4 cycles
-mv	a4,a5  -> 3 cycles
-li	a5,38  -> 3 cycles
-beq	a4,a5,.L6  -> 4 cycles
-j	.L7  -> 3 cycles
+maatrix_mul.o:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010054 <main>:
+   10054:	f2010113          	addi	sp,sp,-224     -> 2
+   10058:	0c112e23          	sw	ra,220(sp)             -> 3
+   1005c:	0c812c23          	sw	s0,216(sp)             -> 3
+   10060:	0e010413          	addi	s0,sp,224      -> 2
+   10064:	000107b7          	lui	a5,0x10                 -> 2
+   10068:	34878713          	addi	a4,a5,840      -> 2
+   1006c:	fa440793          	addi	a5,s0,-92       -> 2
+   10070:	00070693          	mv	a3,a4                    -> 3
+   10074:	04000713          	li	a4,64                    -> 2
+   10078:	00070613          	mv	a2,a4                    -> 3
+   1007c:	00068593          	mv	a1,a3                    -> 3
+   10080:	00078513          	mv	a0,a5                   -> 3
+   10084:	1a8000ef          	jal	ra,1022c <memcpy>  -> 4
+   10088:	000107b7          	lui	a5,0x10                      -> 2
 ```
 Clock cycle per instruction (CPI) = Total number of clock cycles / Number of instructions
 
-So, CPI will be 111/ 40 = 2.775.
+So, CPI will be 36/ 14 = 2.571.
 
 Now,  CPU time = CPI x Number of instructions for a program x Clock cycle time (T)
 
-Let's assume, T = 100ps.
+Let's assume, T = 80ps.
 
-So, CPU time = 2.775x 40 x 100ps = 11100ps or 11.10 ns.
+So, CPU time = 2.571 x 14 x 80ps = 2880ps ~ 2.880ns.
+
+**# ALU - Portion of code**
+
+**CPU performance**
+```
+basic_alu.o:     file format elf32-littleriscv
+
+Disassembly of section .text:
+
+00010054 <main>:
+   10054:	fe010113          	addi	sp,sp,-32   -> 2
+   10058:	00112e23          	sw	ra,28(sp)            -> 3
+   1005c:	00812c23          	sw	s0,24(sp)           -> 3
+   10060:	02010413          	addi	s0,sp,32    -> 2
+   10064:	00a00793          	li	a5,10                -> 2
+   10068:	fef42623          	sw	a5,-20(s0)        -> 3
+   1006c:	0ac0006f          	j	10118 <main+0xc4> ->4
+   10070:	00a00793          	li	a5,10                -> 2
+   10074:	fef42423          	sw	a5,-24(s0)        -> 3
+   10078:	0880006f          	j	10100 <main+0xac>  -> 4
+   1007c:	00000613          	li	a2,0                 -> 2
+   10080:	fe842583          	lw	a1,-24(s0)       -> 2
+   10084:	fec42503          	lw	a0,-20(s0)      -> 2
+   10088:	0b4000ef          	jal	ra,1013c <alu> -> 4
+   1008c:	fea42223          	sw	a0,-28(s0)         -> 3
+   10090:	00100613          	li	a2,1                  -> 2
+   10094:	fe842583          	lw	a1,-24(s0)         -> 2
+   10098:	fec42503          	lw	a0,-20(s0)         -> 2
+   1009c:	0a0000ef          	jal	ra,1013c <alu> -> 4
+
+```
+Clock cycle per instruction (CPI) = Total number of clock cycles / Number of instructions
+
+So, CPI will be 51/ 19 = 2.684.
+
+Now,  CPU time = CPI x Number of instructions for a program x Clock cycle time (T)
+
+Let's assume, T = 80ps.
+
+So, CPU time = 2.684x 19 x 80ps = 4080ps ~ 4.080ns.
 
