@@ -143,6 +143,12 @@ Final dump of sim:
 
 ![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/f73eb55d-3368-4b9c-92ac-521b0d2ecf28)
 
+Showing waveforms with gtkwave for the previous simulation dump:
+
+gtkwave waveform.vcd
+
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/ed31796c-48a5-4bb8-a3e8-bfe3365d2564)
+
 
 
 
