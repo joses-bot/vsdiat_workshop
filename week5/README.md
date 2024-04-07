@@ -47,6 +47,7 @@ vvp self_watering_system_code_v
 
 ```
 
+![Screenshot 2024-04-07 011014](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/fbd82d28-5b39-4d2c-8a15-a14bc190ff64)
 
 
 
