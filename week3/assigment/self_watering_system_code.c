@@ -16,13 +16,13 @@
 /* GPIO bits */
 const int ON =  1;   
 const int OFF = 0; 
-const int MOSFET_ON  = 0x10000000;  
+const int MOSFET_ON  = 0x00020000;  
 const int MOSFET_OFF = 0x00000000; 
-const int BUSY_ON    = 0x20000000;  
+const int BUSY_ON    = 0x00010000;  
 const int BUSY_OFF   = 0x00000000; 
-const int RD_ON      = 0x40000000;  
+const int RD_ON      = 0x00040000;  
 const int RD_OFF     = 0x00000000;  
-const int CONV_ON    = 0x80000000;  
+const int CONV_ON    = 0x00080000;  
 const int CONV_OFF   = 0x00000000;   
 
 /* Define idle time for next check (3 seconds) */
@@ -68,6 +68,8 @@ int busy;
         delay_val(PUMP_TIME);  /*Keep the pump active for some short time */
         printf("\nWater Pump swtich OFF\n");
         setmosfet(MOSFET_OFF);
+        /*Just for simulation*/
+        ///write_busy(BUSY_ON);
         full_adc_conversion(); /* Get new values */
      }
      while( !((water_level >= LVL_LOW) && (water_level <= LVL_HIGH)));  /* Wait until water level is in range */
@@ -82,7 +84,7 @@ int busy;
 }
 
 void setconvst(int convst){
-int mask = 0x7FFFFFFF;  /* Bit 31 */
+int mask = 0xFFF7FFFF;  /* Bit 19 */
 
     asm volatile(
         "and x30, x30, %1\n\t"
@@ -95,7 +97,7 @@ int mask = 0x7FFFFFFF;  /* Bit 31 */
 }
 
 void convst_rd(int convstrd){
-int mask = 0xBFFFFFFF;  /* Bit 30 */
+int mask = 0xFFFBFFFF;  /* Bit 18 */
 
     asm volatile(
         "and x30, x30, %1\n\t"
@@ -108,7 +110,7 @@ int mask = 0xBFFFFFFF;  /* Bit 30 */
 }
 
 void setmosfet(int mosfet_val){
-int mask = 0xEFFFFFFF;  /* Bit 28 */
+int mask = 0xFFFDFFFF;  /* Bit 17 */
 
     asm volatile(
         "and x30, x30, %1\n\t"
@@ -122,7 +124,7 @@ int mask = 0xEFFFFFFF;  /* Bit 28 */
 
 
 int write_busy(int busy_val){
-int mask = 0xDFFFFFFF;  /* Bit 29 */
+int mask = 0xEFFEFFFF;  /* Bit 16 */
 
     asm volatile(
         "and x30, x30, %1\n\t"
@@ -137,7 +139,7 @@ int read_busy(){
 int busy_val; 
 
     asm volatile(
-        "srli x10, x30, 29\n\t"  /* Bit 29 */
+        "srli x10, x30, 16\n\t"  /* Bit 16 */
         "andi %0, x10, 1\n\t"
         : "=r"(busy_val)
         :
