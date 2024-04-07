@@ -11,6 +11,35 @@ testbench.v
 
 ```
 
+### Using python script to determine unique instructions
+
+```
+Number of different instructions: 22
+List of unique instructions:
+sub
+li
+lw
+mv
+andi
+nop
+or
+srli
+bge
+slli
+and
+ret
+beq
+addi
+sw
+blt
+bne
+jal
+j
+lui
+bnez
+add
+```
+
 ### Modifying GPIO's to match the ones used in the design
 
 processor.v gpio input and output verilog changes for the x30 register.
