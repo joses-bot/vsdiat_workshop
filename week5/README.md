@@ -138,5 +138,11 @@ T_0.0 ;
 
 ![Screenshot 2024-04-07 011014](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/fbd82d28-5b39-4d2c-8a15-a14bc190ff64)
 
+Final dump of sim:
+
+
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/f73eb55d-3368-4b9c-92ac-521b0d2ecf28)
+
+
 
 
