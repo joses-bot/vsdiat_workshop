@@ -1,7 +1,6 @@
 ### UPDATING THE JSON FILE AND GENERATING THE RTL FOR OUR SPECIFIC APP USING THE CHIPCRON TOOL
 
-![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/a4204484-7141-4ac4-b5fa-d5b7179364a5)
-
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/7b8775cf-88a4-4d22-9cf7-32a74c95c1cc)
 
 ### Files Generated:
 
