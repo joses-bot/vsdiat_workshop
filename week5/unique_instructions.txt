@@ -1,27 +1,24 @@
-Number of different instructions: 22JAL
+Number of different instructions: 22
 List of unique instructions:
-sub  
-li   
-lw   
-mv   
-andi 
-nop  
-or   
-srli 
-bge  
-slli 
-and  
-ret  
-beq  
-addi 
-sw   
-blt  
-bne  
-jal  
-j     
-lui  
-bnez  
-add   
-
-
-li, mv = ADDI ; j, ret = JAL ; beqz = beq ; bnez = bne
+lui
+sub
+add
+addi
+or
+bnez
+and
+beq
+lw
+slli
+li
+srli
+jal
+j
+bge
+andi
+mv
+blt
+bne
+ret
+sw
+nop
