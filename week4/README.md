@@ -1,8 +1,8 @@
 ### C Code removing - system calls & system libraries (include/printf/scanf, etc)
 
 ```
-///#include<stdio.h> 
-///#include<stdlib.h>
+/////#include<stdio.h> 
+/////#include<stdlib.h>
 
 /* Define how long the pump will run (2 seconds) */
 #define PUMP_TIME 2
@@ -37,22 +37,24 @@ void setmosfet(int mosfet_val);
 int read_busy();
 int read_adc_val();
 void delay_val(int seconds);
-void full_adc_conversion();
+void full_adc_conversion(int *moisture_level, int *water_level);
 
-/* Global variables */
-int moisture_level;
-int water_level;
+// Change global variables into local ones /* Global variables */
+/////int moisture_level;
+////int water_level;
 
 /*Just for simulation*/
 int write_busy(int busy_val);
-int initialize_x30();
 
 int main() {
 
 int busy;
+int moisture_level=0;
+int water_level=0;
+
 
   /* Initially keep motor OFF - ADC Converter RD signal to 0 */
-  /////printf("\nSystem start - Water Pump motor off - ADC initialized\n");
+  //////printf("\nSystem start - Water Pump motor off - ADC initialized\n");
   setmosfet(MOSFET_OFF);
   convst_rd(RD_OFF);
   setconvst(CONV_ON);
@@ -65,20 +67,20 @@ int busy;
      //////printf("\nLow moisture! Time to water! \n");
    
      do {
-        ////printf("\nCheck water level = %d (Must be within %d and %d)\n", water_level, LVL_LOW, LVL_HIGH );
+        /////printf("\nCheck water level = %d (Must be within %d and %d)\n", water_level, LVL_LOW, LVL_HIGH );
         setmosfet(MOSFET_ON);
-        ////printf("\nWater level low - Water Pump swtich ON for a short time\n");
+        /////printf("\nWater level low - Water Pump swtich ON for a short time\n");
         delay_val(PUMP_TIME);  /*Keep the pump active for some short time */
-        ///printf("\nWater Pump swtich OFF\n");
+        /////printf("\nWater Pump swtich OFF\n");
         setmosfet(MOSFET_OFF);
         /*Just for simulation*/
         ///write_busy(BUSY_ON);
-        full_adc_conversion(); /* Get new values */
+        full_adc_conversion(&moisture_level, &water_level); /* Get new values */
      }
      while( !((water_level >= LVL_LOW) && (water_level <= LVL_HIGH)));  /* Wait until water level is in range */
      }
   else {
-       //////printf("\nEverything OK, The water pump is on standby \n");
+       /////printf("\nEverything OK, The water pump is on standby \n");
        delay_val(IDLE_TIME);
        }
 
@@ -172,7 +174,7 @@ asm ("nop");
 }
 }
 
-void full_adc_conversion(){
+void full_adc_conversion(int *moisture_level, int *water_level){
   int jj;
   int conv_done;
 
@@ -187,15 +189,15 @@ void full_adc_conversion(){
   for (jj = 0; jj < ADC_CHANNELS ; jj ++){
     if(jj == 0){
        convst_rd(RD_ON);
-       moisture_level = read_adc_val();  /* Read soil moisture level (global variable) */ 
+       *moisture_level = read_adc_val();  /* Read soil moisture level (global variable) */ 
        convst_rd(RD_OFF);
-       //////printf("\nRead soild moisture level = %d\n", moisture_level);
+       //////printf("\nRead soild moisture level = %d\n", *moisture_level);
     }
     else if(jj == 1){
        convst_rd(RD_ON);
-       water_level = read_adc_val();  /* Read water level  (global variable) */
+       *water_level = read_adc_val();  /* Read water level  (global variable) */
        convst_rd(RD_OFF);
-       //////printf("\nRead water level = %d\n", water_level);
+       //////printf("\nRead water level = %d\n", *water_level);
     }      
     else  {
        convst_rd(RD_ON);    /* Dummhy reads */
