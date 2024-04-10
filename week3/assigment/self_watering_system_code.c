@@ -34,19 +34,21 @@ void setmosfet(int mosfet_val);
 int read_busy();
 int read_adc_val();
 void delay_val(int seconds);
-void full_adc_conversion();
+void full_adc_conversion(int *moisture_level, int *water_level);
 
-/* Global variables */
-int moisture_level;
-int water_level;
+// Change global variables into local ones /* Global variables */
+/////int moisture_level;
+////int water_level;
 
 /*Just for simulation*/
 int write_busy(int busy_val);
-int initialize_x30();
 
 int main() {
 
 int busy;
+int moisture_level=0;
+int water_level=0;
+
 
   /* Initially keep motor OFF - ADC Converter RD signal to 0 */
   printf("\nSystem start - Water Pump motor off - ADC initialized\n");
@@ -70,7 +72,7 @@ int busy;
         setmosfet(MOSFET_OFF);
         /*Just for simulation*/
         ///write_busy(BUSY_ON);
-        full_adc_conversion(); /* Get new values */
+        full_adc_conversion(&moisture_level, &water_level); /* Get new values */
      }
      while( !((water_level >= LVL_LOW) && (water_level <= LVL_HIGH)));  /* Wait until water level is in range */
      }
@@ -169,7 +171,7 @@ asm ("nop");
 }
 }
 
-void full_adc_conversion(){
+void full_adc_conversion(int *moisture_level, int *water_level){
   int jj;
   int conv_done;
 
@@ -184,15 +186,15 @@ void full_adc_conversion(){
   for (jj = 0; jj < ADC_CHANNELS ; jj ++){
     if(jj == 0){
        convst_rd(RD_ON);
-       moisture_level = read_adc_val();  /* Read soil moisture level (global variable) */ 
+       *moisture_level = read_adc_val();  /* Read soil moisture level (global variable) */ 
        convst_rd(RD_OFF);
-       printf("\nRead soild moisture level = %d\n", moisture_level);
+       printf("\nRead soild moisture level = %d\n", *moisture_level);
     }
     else if(jj == 1){
        convst_rd(RD_ON);
-       water_level = read_adc_val();  /* Read water level  (global variable) */
+       *water_level = read_adc_val();  /* Read water level  (global variable) */
        convst_rd(RD_OFF);
-       printf("\nRead water level = %d\n", water_level);
+       printf("\nRead water level = %d\n", *water_level);
     }      
     else  {
        convst_rd(RD_ON);    /* Dummhy reads */
