@@ -90,53 +90,53 @@ A file self_watering_system_code_v is generated (the full version is in the fold
 :vpi_module "vhdl_sys";
 :vpi_module "v2005_math";
 :vpi_module "va_math";
-S_0x55b6e90b3350 .scope module, "tb" "tb" 2 13;
+S_0x560a31d35e10 .scope module, "tb" "tb" 2 13;
  .timescale 0 0;
-P_0x55b6e90eb9a0 .param/l "BIT_P" 1 2 36, +C4<00000000000000011001011011100110>;
-P_0x55b6e90eb9e0 .param/l "BIT_RATE" 1 2 35, +C4<00000000000000000010010110000000>;
-P_0x55b6e90eba20 .param/l "CLK_HZ" 1 2 40, +C4<00000010111110101111000010000000>;
-P_0x55b6e90eba60 .param/l "CLK_P" 1 2 41, +C4<00000000000000000000000000010100>;
-v0x55b6e914ac50_0 .var "clk", 0 0;
-v0x55b6e914ad10_0 .var/i "fails", 31 0;
-v0x55b6e914adf0_0 .var "input_wires", 16 0;
-v0x55b6e914aef0_0 .var "neg_clk", 0 0;
-v0x55b6e914af90_0 .var "neg_rst", 0 0;
-v0x55b6e914b0a0_0 .net "output_wires", 2 0, v0x55b6e9149670_0;  1 drivers
-v0x55b6e914b160_0 .var/i "passes", 31 0;
-v0x55b6e914b220_0 .var "resetn", 0 0;
-v0x55b6e914b310_0 .var "rst", 0 0;
-v0x55b6e914b3d0_0 .var "rst_pin", 0 0;
-v0x55b6e914b490_0 .var "slow_clk", 0 0;
-v0x55b6e914b550_0 .net "uart_rx_break", 0 0, L_0x55b6e917c110;  1 drivers
-v0x55b6e914b5f0_0 .net "uart_rx_data", 7 0, v0x55b6e9148160_0;  1 drivers
-v0x55b6e914b700_0 .var "uart_rx_en", 0 0;
-v0x55b6e914b7f0_0 .net "uart_rx_valid", 0 0, L_0x55b6e917c6b0;  1 drivers
-v0x55b6e914b8e0_0 .var "uart_rxd", 0 0;
-v0x55b6e914b9d0_0 .net "write_done", 0 0, v0x55b6e914a330_0;  1 drivers
-E_0x55b6e89bfe30 .event posedge, v0x55b6e914b490_0;
-S_0x55b6e8fda7f0 .scope task, "check_byte" "check_byte" 2 92, 2 92 0, S_0x55b6e90b3350;
+P_0x560a31d6e500 .param/l "BIT_P" 1 2 36, +C4<00000000000000011001011011100110>;
+P_0x560a31d6e540 .param/l "BIT_RATE" 1 2 35, +C4<00000000000000000010010110000000>;
+P_0x560a31d6e580 .param/l "CLK_HZ" 1 2 40, +C4<00000010111110101111000010000000>;
+P_0x560a31d6e5c0 .param/l "CLK_P" 1 2 41, +C4<00000000000000000000000000010100>;
+v0x560a31dc8100_0 .var "clk", 0 0;
+v0x560a31dc81c0_0 .var/i "fails", 31 0;
+v0x560a31dc82a0_0 .var "input_wires", 3 0;
+v0x560a31dc83a0_0 .var "neg_clk", 0 0;
+v0x560a31dc8440_0 .var "neg_rst", 0 0;
+v0x560a31dc8550_0 .net "output_wires", 3 0, v0x560a31dc6b20_0;  1 drivers
+v0x560a31dc8610_0 .var/i "passes", 31 0;
+v0x560a31dc86d0_0 .var "resetn", 0 0;
+v0x560a31dc87c0_0 .var "rst", 0 0;
+v0x560a31dc8880_0 .var "rst_pin", 0 0;
+v0x560a31dc8940_0 .var "slow_clk", 0 0;
+v0x560a31dc8a00_0 .net "uart_rx_break", 0 0, L_0x560a31e03240;  1 drivers
+v0x560a31dc8aa0_0 .net "uart_rx_data", 7 0, v0x560a31dc5610_0;  1 drivers
+v0x560a31dc8bb0_0 .var "uart_rx_en", 0 0;
+v0x560a31dc8ca0_0 .net "uart_rx_valid", 0 0, L_0x560a31e037e0;  1 drivers
+v0x560a31dc8d90_0 .var "uart_rxd", 0 0;
+v0x560a31dc8e80_0 .net "write_done", 0 0, v0x560a31dc77e0_0;  1 drivers
+E_0x560a315bc800 .event posedge, v0x560a31dc8940_0;
+S_0x560a31c50330 .scope task, "check_byte" "check_byte" 2 92, 2 92 0, S_0x560a31d35e10;
  .timescale 0 0;
-v0x55b6e9008050_0 .var "expected_value", 7 0;
+v0x560a31c8ab60_0 .var "expected_value", 7 0;
 TD_tb.check_byte ;
-    %load/vec4 v0x55b6e914b5f0_0;
-    %load/vec4 v0x55b6e9008050_0;
+    %load/vec4 v0x560a31dc8aa0_0;
+    %load/vec4 v0x560a31c8ab60_0;
     %cmp/e;
     %jmp/0xz  T_0.0, 4;
-    %load/vec4 v0x55b6e914b160_0;
+    %load/vec4 v0x560a31dc8610_0;
     %addi 1, 0, 32;
-    %store/vec4 v0x55b6e914b160_0, 0, 32;
-    %load/vec4 v0x55b6e914b160_0;
-    %load/vec4 v0x55b6e914ad10_0;
+    %store/vec4 v0x560a31dc8610_0, 0, 32;
+    %load/vec4 v0x560a31dc8610_0;
+    %load/vec4 v0x560a31dc81c0_0;
     %add;
-	  %vpi_call 2 97 "$display", "%d/%d/%d [PASS] Expected %b and got %b", v0x55b6e914b160_0, v0x55b6e914ad10_0, S<0,vec4,s32>, v0x55b6e9008050_0, v0x55b6e914b5f0_0 {1 0 0};
+	  %vpi_call 2 97 "$display", "%d/%d/%d [PASS] Expected %b and got %b", v0x560a31dc8610_0, v0x560a31dc81c0_0, S<0,vec4,s32>, v0x560a31c8ab60_0, v0x560a31dc8aa0_0 {1 0 0};
     %jmp T_0.1;
 T_0.0 ;
-    %load/vec4 v0x55b6e914ad10_0;
+    %load/vec4 v0x560a31dc81c0_0;
     %addi 1, 0, 32;
-    %store/vec4 v0x55b6e914ad10_0, 0, 32;
-    %load/vec4 v0x55b6e914b160_0;
-    %load/vec4 v0x55b6e914ad10_0;
-    %add;
+    %store/vec4 v0x560a31dc81c0_0, 0, 32;
+    %load/vec4 v0x560a31dc8610_0;
+    %load/vec4 v0x560a31dc81c0_0;
+
 
 ```
 
