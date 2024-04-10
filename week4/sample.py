@@ -1,4 +1,4 @@
-with open('water_level_assembly.txt', 'r') as file:
+with open('self_watering_system_code.txt', 'r') as file:
     assembly_code = file.read()
 lines = assembly_code.split('\n')
 unique_instructions = set()
