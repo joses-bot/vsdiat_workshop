@@ -1,4 +1,5 @@
 ### C Code removing - system calls & system libraries (include/printf/scanf, etc)
+Changing global variables into local ones
 
 ```
 /////#include<stdio.h> 
