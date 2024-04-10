@@ -13,30 +13,35 @@ testbench.v
 ### Using python script to determine unique instructions
 
 ```
-Number of different instructions: 22
+Number of different instructions: 22JAL
 List of unique instructions:
-sub
-li
-lw
-mv
-andi
-nop
-or
-srli
-bge
-slli
-and
-ret
-beq
-addi
-sw
-blt
-bne
-jal
-j
-lui
-bnez
-add
+sub  
+li   
+lw   
+mv   
+andi 
+nop  
+or   
+srli 
+bge  
+slli 
+and  
+ret  
+beq  
+addi 
+sw   
+blt  
+bne  
+jal  
+j     
+lui  
+bnez  
+add   
+
+li, mv = ADDI ; j, ret = JAL ; beqz = beq ; bnez = bne
+
+Updating with that information: self_watering_system.json
+
 ```
 
 ### Modifying GPIO's to match the ones used in the design
