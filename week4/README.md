@@ -221,92 +221,71 @@ self_watering_system_code.o:     file format elf32-littleriscv
 
 ### Assembly code generated (Portion of it, see complete file in folder)
 
+```
+out:     file format elf32-littleriscv
+
+
 Disassembly of section .text:
 
-```
-0000000000010184 <main>:
-   10184:	ff010113          	addi	sp,sp,-16
-   10188:	00113423          	sd	ra,8(sp)
-   1018c:	00813023          	sd	s0,0(sp)
-   10190:	01010413          	addi	s0,sp,16
-   10194:	000217b7          	lui	a5,0x21
-   10198:	57078513          	addi	a0,a5,1392 # 21570 <__clzdi2+0x44>
-   1019c:	660000ef          	jal	ra,107fc <printf>
-   101a0:	00000793          	li	a5,0
-   101a4:	00078513          	mv	a0,a5
-   101a8:	15c000ef          	jal	ra,10304 <setmosfet>
-   101ac:	00000793          	li	a5,0
-   101b0:	00078513          	mv	a0,a5
-   101b4:	110000ef          	jal	ra,102c4 <convst_rd>
-   101b8:	800007b7          	lui	a5,0x80000
-   101bc:	00078513          	mv	a0,a5
-   101c0:	0c4000ef          	jal	ra,10284 <setconvst>
-   101c4:	000247b7          	lui	a5,0x24
-   101c8:	6687a783          	lw	a5,1640(a5) # 24668 <moisture_level>
-   101cc:	00078713          	mv	a4,a5
-   101d0:	19000793          	li	a5,400
-   101d4:	08e7cc63          	blt	a5,a4,1026c <main+0xe8>
-   101d8:	000217b7          	lui	a5,0x21
-   101dc:	5a878513          	addi	a0,a5,1448 # 215a8 <__clzdi2+0x7c>
-   101e0:	61c000ef          	jal	ra,107fc <printf>
-   101e4:	000247b7          	lui	a5,0x24
-   101e8:	66c7a783          	lw	a5,1644(a5) # 2466c <water_level>
-   101ec:	25800693          	li	a3,600
-   101f0:	19000613          	li	a2,400
-   101f4:	00078593          	mv	a1,a5
-   101f8:	000217b7          	lui	a5,0x21
-   101fc:	5c878513          	addi	a0,a5,1480 # 215c8 <__clzdi2+0x9c>
-   10200:	5fc000ef          	jal	ra,107fc <printf>
-   10204:	100007b7          	lui	a5,0x10000
-   10208:	00078513          	mv	a0,a5
-   1020c:	0f8000ef          	jal	ra,10304 <setmosfet>
-   10210:	000217b7          	lui	a5,0x21
-   10214:	60078513          	addi	a0,a5,1536 # 21600 <__clzdi2+0xd4>
-   10218:	5e4000ef          	jal	ra,107fc <printf>
-   1021c:	00200513          	li	a0,2
-   10220:	1c0000ef          	jal	ra,103e0 <delay_val>
-   10224:	000217b7          	lui	a5,0x21
-   10228:	64078513          	addi	a0,a5,1600 # 21640 <__clzdi2+0x114>
-   1022c:	5d0000ef          	jal	ra,107fc <printf>
-   10230:	00000793          	li	a5,0
-   10234:	00078513          	mv	a0,a5
-   10238:	0cc000ef          	jal	ra,10304 <setmosfet>
-   1023c:	218000ef          	jal	ra,10454 <full_adc_conversion>
-   10240:	000247b7          	lui	a5,0x24
-   10244:	66c7a783          	lw	a5,1644(a5) # 2466c <water_level>
-   10248:	00078713          	mv	a4,a5
-   1024c:	18f00793          	li	a5,399
-   10250:	f8e7dae3          	bge	a5,a4,101e4 <main+0x60>
-   10254:	000247b7          	lui	a5,0x24
-   10258:	66c7a783          	lw	a5,1644(a5) # 2466c <water_level>
-   1025c:	00078713          	mv	a4,a5
-   10260:	25800793          	li	a5,600
-   10264:	f8e7c0e3          	blt	a5,a4,101e4 <main+0x60>
-   10268:	f5dff06f          	j	101c4 <main+0x40>
-   1026c:	000217b7          	lui	a5,0x21
-   10270:	65878513          	addi	a0,a5,1624 # 21658 <__clzdi2+0x12c>
-   10274:	588000ef          	jal	ra,107fc <printf>
-   10278:	00300513          	li	a0,3
-   1027c:	164000ef          	jal	ra,103e0 <delay_val>
-   10280:	f45ff06f          	j	101c4 <main+0x40>
+00010054 <main>:
+   10054:	fe010113          	addi	sp,sp,-32
+   10058:	00112e23          	sw	ra,28(sp)
+   1005c:	00812c23          	sw	s0,24(sp)
+   10060:	02010413          	addi	s0,sp,32
+   10064:	fe042623          	sw	zero,-20(s0)
+   10068:	fe042423          	sw	zero,-24(s0)
+   1006c:	00000793          	li	a5,0
+   10070:	00078513          	mv	a0,a5
+   10074:	0fc000ef          	jal	ra,10170 <setmosfet>
+   10078:	00000793          	li	a5,0
+   1007c:	00078513          	mv	a0,a5
+   10080:	0b4000ef          	jal	ra,10134 <convst_rd>
+   10084:	000807b7          	lui	a5,0x80
+   10088:	00078513          	mv	a0,a5
+   1008c:	06c000ef          	jal	ra,100f8 <setconvst>
+   10090:	fec42703          	lw	a4,-20(s0)
+   10094:	19000793          	li	a5,400
+   10098:	04e7ca63          	blt	a5,a4,100ec <main+0x98>
+   1009c:	000207b7          	lui	a5,0x20
+   100a0:	00078513          	mv	a0,a5
+   100a4:	0cc000ef          	jal	ra,10170 <setmosfet>
+   100a8:	00200513          	li	a0,2
+   100ac:	198000ef          	jal	ra,10244 <delay_val>
+   100b0:	00000793          	li	a5,0
+   100b4:	00078513          	mv	a0,a5
+   100b8:	0b8000ef          	jal	ra,10170 <setmosfet>
+   100bc:	fe840713          	addi	a4,s0,-24
+   100c0:	fec40793          	addi	a5,s0,-20
+   100c4:	00070593          	mv	a1,a4
+   100c8:	00078513          	mv	a0,a5
+   100cc:	1e4000ef          	jal	ra,102b0 <full_adc_conversion>
+   100d0:	fe842703          	lw	a4,-24(s0)
+   100d4:	18f00793          	li	a5,399
+   100d8:	fce7d2e3          	bge	a5,a4,1009c <main+0x48>
+   100dc:	fe842703          	lw	a4,-24(s0)
+   100e0:	25800793          	li	a5,600
+   100e4:	fae7cce3          	blt	a5,a4,1009c <main+0x48>
+   100e8:	fa9ff06f          	j	10090 <main+0x3c>
+   100ec:	00300513          	li	a0,3
+   100f0:	154000ef          	jal	ra,10244 <delay_val>
+   100f4:	f9dff06f          	j	10090 <main+0x3c>
 
-0000000000010284 <setconvst>:
-   10284:	fd010113          	addi	sp,sp,-48
-   10288:	02813423          	sd	s0,40(sp)
-   1028c:	03010413          	addi	s0,sp,48
-   10290:	00050793          	mv	a5,a0
-   10294:	fcf42e23          	sw	a5,-36(s0)
-   10298:	800007b7          	lui	a5,0x80000
-   1029c:	fff7c793          	not	a5,a5
-   102a0:	fef42623          	sw	a5,-20(s0)
-   102a4:	fdc42783          	lw	a5,-36(s0)
-   102a8:	fec42703          	lw	a4,-20(s0)
-   102ac:	00ef7f33          	and	t5,t5,a4
-   102b0:	00ff6f33          	or	t5,t5,a5
-   102b4:	00000013          	nop
-   102b8:	02813403          	ld	s0,40(sp)
-   102bc:	03010113          	addi	sp,sp,48
-   102c0:	00008067          	ret
+000100f8 <setconvst>:
+   100f8:	fd010113          	addi	sp,sp,-48
+   100fc:	02812623          	sw	s0,44(sp)
+   10100:	03010413          	addi	s0,sp,48
+   10104:	fca42e23          	sw	a0,-36(s0)
+   10108:	fff807b7          	lui	a5,0xfff80
+   1010c:	fff78793          	addi	a5,a5,-1 # fff7ffff <__global_pointer$+0xfff6e443>
+   10110:	fef42623          	sw	a5,-20(s0)
+   10114:	fdc42783          	lw	a5,-36(s0)
+   10118:	fec42703          	lw	a4,-20(s0)
+   1011c:	00ef7f33          	and	t5,t5,a4
+   10120:	00ff6f33          	or	t5,t5,a5
+   10124:	00000013          	nop
+   10128:	02c12403          	lw	s0,44(sp)
+   1012c:	03010113          	addi	sp,sp,48
+   10130:	00008067          	ret
 
 ```
 
