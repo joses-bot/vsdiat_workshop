@@ -22,3 +22,6 @@ bne
 ret
 sw
 nop
+
+li, mv = ADDI ; j, ret = JAL ; beqz = beq ; bnez = bne
+
