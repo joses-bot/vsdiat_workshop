@@ -145,7 +145,7 @@ T_0.0 ;
 Final dump of sim:
 
 
-![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/f73eb55d-3368-4b9c-92ac-521b0d2ecf28)
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/95140bca-ceb3-4d62-bb26-e4962dc379f3)
 
 Showing waveforms with gtkwave for the previous simulation dump:
 
