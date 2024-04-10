@@ -13,32 +13,32 @@ testbench.v
 ### Using python script to determine unique instructions
 
 ```
-Number of different instructions: 22JAL
+Number of different instructions: 22
 List of unique instructions:
-sub  
-li   
-lw   
-mv   
-andi 
-nop  
-or   
-srli 
-bge  
-slli 
-and  
-ret  
-beq  
-addi 
-sw   
-blt  
-bne  
-jal  
-j     
-lui  
-bnez  
-add   
+lui
+sub
+add
+addi
+or
+bnez
+and
+beq
+lw
+slli
+li
+srli
+jal
+j
+bge
+andi
+mv
+blt
+bne
+ret
+sw
+nop
 
-li, mv = ADDI ; j, ret = JAL ; beqz = beq ; bnez = bne
+li, mv = ADDI ; j, ret = JAL ; beqz = beq ; bnez = bne
 
 Updating with that information: self_watering_system.json
 
