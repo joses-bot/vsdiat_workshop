@@ -221,6 +221,7 @@ self_watering_system_code.o:     file format elf32-littleriscv
 
 ### Assembly code generated (Portion of it, see complete file in folder)
 
+```
 out:     file format elf32-littleriscv
 
 
