@@ -158,8 +158,8 @@ int read_adc_val(){
 int adc_conv; 
 
     asm volatile(
-        "srli x10, x30, 15\n\t"  /* Bits 15-0 */
-        "andi %0, x10, 31\n\t"
+        "srli x10, x30, 0\n\t"  /* Bits 7-0 */
+        "andi %0, x10, 256\n\t"
         : "=r"(adc_conv)
         :
         : "x30"
