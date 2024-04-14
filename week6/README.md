@@ -44,3 +44,12 @@ git fetch --unshallow
 make -j$(nproc)
 sudo make install
 
+Reading design
+
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/4c61bf7e-2743-45a0-a70b-e072d469e1fa)
+
+Analyzing herarchie:
+
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/98328a5b-3d10-455a-a85a-28567b78d637)
+
+
