@@ -13,10 +13,12 @@ iverilog -o self_watering_system_code_v testbench1.v processor1.v
 
 vvp self_watering_system_code_v -fst
 
-![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/1b046b0c-8d68-42ec-8831-b66bbf9f5ea3)
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/d36ca831-63a9-49ed-83de-3c09631418a0)
+
 
 ### Showing waveforms with GTKwave
 
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/437dd3a5-f4ff-4722-970c-c389007d19b4)
 
 
 
