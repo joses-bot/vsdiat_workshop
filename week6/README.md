@@ -20,5 +20,27 @@ vvp self_watering_system_code_v -fst
 
 ![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/437dd3a5-f4ff-4722-970c-c389007d19b4)
 
+### GATE-LEVEL SYNTHESIS
 
+Synthesis transforms the simple RTL design into a gate-level netlist with all the constraints as specified by the designer. In simple language, Synthesis is a process that converts the abstract form of design to a properly implemented chip in terms of logic gates.
+
+Synthesis takes place by performing the RTL convertion into simple logic gates then mapping the resultant gates into technology dependant gates available inthe technology used
+
+
+### YOSYS Installation
+
+Installing Yosys: https://github.com/YosysHQ/yosys on the vsdworkshop VM.
+
+git clone https://github.com/YosysHQ/yosys yosys --depth 1
+
+sudo apt install build-essential clang bison flex libreadline-dev \
+    gawk tcl-dev libffi-dev git graphviz \
+    xdot pkg-config python python3 libftdi-dev \
+    qt5-default python3-dev libboost-all-dev cmake libeigen3-dev
+
+cd yosys
+git fetch --unshallow
+
+make -j$(nproc)
+sudo make install
 
