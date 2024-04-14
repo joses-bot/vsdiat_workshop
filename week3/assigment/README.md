@@ -43,8 +43,7 @@ We always do 8 reads (only need 2 are needed and 6 are dummy reads to get the va
 ![image](https://github.com/joses-bot/jose_vdiasat_workshop/assets/83429049/c95d5cc3-3b2d-45af-8d43-e59ed4d5e897)
 
 ### Register architecture of x30 for GPIOs
-![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/698df51a-73f1-4703-bdf3-64259dd74d4c)
-
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/7b2fff3b-83f2-4241-81bf-a7d774612cff)
 
 
 ### Code compile and simulation with SPIKE
