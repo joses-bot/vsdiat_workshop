@@ -7072,12 +7072,13 @@ endmodule
 
     endmodule
 
-    module wrapper(clk,resetn,uart_rxd,uart_rx_en,uart_rx_break,uart_rx_valid,uart_rx_data, output_gpio_pins, input_gpio_pins, write_done, instructions);
+    module wrapper(clk,resetn,uart_rxd,uart_rx_en,uart_rx_break,uart_rx_valid,uart_rx_data, CONV, CONV_RD, SW_MOSFET, BUSY_RD, ADC_input, write_done, instructions);
     input clk;
     output reg write_done ; 
     output reg [2:0] instructions ; 
-    input wire [16:0] input_gpio_pins;
-    output reg [2:0] output_gpio_pins;  
+    input [15:0] ADC_input;
+    input BUSY_RD;
+    output reg CONV,CONV_RD,Motor2A,CONV_RD;  
     reg rst;
     reg neg_clk; 
     reg neg_rst; 
@@ -7088,7 +7089,7 @@ endmodule
     output uart_rx_valid; // Valid data recieved and available.
     output [7:0] uart_rx_data  ; // The recieved data.
 
-
+    wire [16:0] input_gpio_pins;
     wire web;
     wire [7:0]inst_mem_addr;
     wire [7:0] data_mem_addr;
@@ -7123,6 +7124,8 @@ endmodule
 
     reg [1:0]inst_byte_count;
     reg inst_flag;// active low as write enable of sram is active low 
+    
+    assign input_gpio_pins = {BUSY_RD, ADC_input};
 
     always@(*)
     begin 
@@ -7305,7 +7308,9 @@ endmodule
     always @(posedge clk) 
     begin
     output_pins = {12'b0, top_gpio_pins[19:17],  input_gpio_pins[16:0]} ; 
-    output_gpio_pins = top_gpio_pins[19:17]; 
+    SW_MOSFET   = top_gpio_pins[17]; 
+    CONV_RD     = top_gpio_pins[18]; 
+    CONV        = top_gpio_pins[19]; 
     write_done = writing_inst_done ; 
     instructions = write_inst_count[2:0]; 
 

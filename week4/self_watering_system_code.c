@@ -52,9 +52,6 @@ int water_level=0;
 
   /* Initially keep motor OFF - ADC Converter RD signal to 0 */
   //////printf("\nSystem start - Water Pump motor off - ADC initialized\n");
-  setmosfet(MOSFET_OFF);
-  convst_rd(RD_OFF);
-  setconvst(CONV_ON);
 
   while(1){
 
@@ -154,8 +151,8 @@ int read_adc_val(){
 int adc_conv; 
 
     asm volatile(
-        "srli x10, x30, 15\n\t"  /* Bits 15-0 */
-        "andi %0, x10, 31\n\t"
+        "srli x10, x30, 0\n\t"  /* Bits 15-0 */
+        "andi %0, x10, 255\n\t"
         : "=r"(adc_conv)
         :
         : "x30"

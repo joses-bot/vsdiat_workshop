@@ -113,8 +113,8 @@ begin
     $dumpvars(0,tb);
 end 
 
-reg [16:0] input_wires; 
-wire [2:0] output_wires ; 
+reg [3:0] input_wires; 
+wire [3:0] output_wires ; 
 wire [2:0] pc ; 
 
 
@@ -129,7 +129,7 @@ initial begin
     neg_rst = ~clk ;
     uart_rxd = 1'b1;
     neg_clk = 1'b1; 
-    input_wires = 17'b00000000000000111;
+    input_wires = 4'b0111;
     #4000
     resetn = 1'b1;
     rst=0;
@@ -146,15 +146,6 @@ initial begin
     @(posedge slow_clk);write_instruction(32'h02010413); 
     @(posedge slow_clk);write_instruction(32'hfe042623); 
     @(posedge slow_clk);write_instruction(32'hfe042423); 
-    @(posedge slow_clk);write_instruction(32'h00000793); 
-    @(posedge slow_clk);write_instruction(32'h00078513); 
-    @(posedge slow_clk);write_instruction(32'h0fc000ef); 
-    @(posedge slow_clk);write_instruction(32'h00000793); 
-    @(posedge slow_clk);write_instruction(32'h00078513); 
-    @(posedge slow_clk);write_instruction(32'h0b4000ef); 
-    @(posedge slow_clk);write_instruction(32'h000807b7); 
-    @(posedge slow_clk);write_instruction(32'h00078513); 
-    @(posedge slow_clk);write_instruction(32'h06c000ef); 
     @(posedge slow_clk);write_instruction(32'hfec42703); 
     @(posedge slow_clk);write_instruction(32'h19000793); 
     @(posedge slow_clk);write_instruction(32'h04e7ca63); 
@@ -256,8 +247,8 @@ initial begin
     @(posedge slow_clk);write_instruction(32'hfe010113); 
     @(posedge slow_clk);write_instruction(32'h00812e23); 
     @(posedge slow_clk);write_instruction(32'h02010413); 
-    @(posedge slow_clk);write_instruction(32'h00ff5513); 
-    @(posedge slow_clk);write_instruction(32'h01f57793); 
+    @(posedge slow_clk);write_instruction(32'h000f5513); 
+    @(posedge slow_clk);write_instruction(32'h0ff57793); 
     @(posedge slow_clk);write_instruction(32'hfef42623); 
     @(posedge slow_clk);write_instruction(32'hfec42783); 
     @(posedge slow_clk);write_instruction(32'h00078513); 

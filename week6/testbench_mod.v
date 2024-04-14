@@ -147,86 +147,47 @@ initial begin
     #4000
     dac_input = 16'h0000;
     
-    ////@(negedge conv)
+    @(negedge conv)
      busy_rd = 1'b1;
      #100
      busy_rd = 1'b0;
      dac_input = 16'h0100;
      
      #100
-     ////@(posedge conv_rd)
+     @(posedge conv_rd)
      dac_input = 16'h0100;
      
      #100
      ////@(posedge conv_rd)
-     dac_input = 16'h0200;    
+     ////dac_input = 16'h0200;    
      
      #100
      ////@(posedge conv_rd)
-     dac_input = 16'h0000;    
+     ///dac_input = 16'h0000;    
 
      #100
      ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
+     ///dac_input = 16'h0000;  
      
      #100
      ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
+     ///dac_input = 16'h0000;  
      
      #100
      ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
+     ///dac_input = 16'h0000;  
      
      #100
      ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
+     ///dac_input = 16'h0000;  
      
      #100
      ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
+     ///dac_input = 16'h0000;  
      
-
 
     #4000
     dac_input = 16'h0000;
-    
-    ////@(negedge conv)
-     busy_rd = 1'b1;
-     #100
-     busy_rd = 1'b0;
-     dac_input = 16'h0200;
-     
-     #100
-     ////@(posedge conv_rd)
-     dac_input = 16'h0200;
-     
-     #100
-     ////@(posedge conv_rd)
-     dac_input = 16'h0300;    
-     
-     #100
-     ////@(posedge conv_rd)
-     dac_input = 16'h0000;    
-
-     #100
-     ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
-     
-     #100
-     ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
-     
-     #100
-     ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
-     
-     #100
-     ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
-     
-     #100
-     ////@(posedge conv_rd)
-     dac_input = 16'h0000;  
      
 
     uart_rx_en = 1'b1;
