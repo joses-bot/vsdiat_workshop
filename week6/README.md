@@ -108,7 +108,346 @@ Successfully finished Verilog frontend.
 yosys> 
 ```
 ```
-Including only final result
+Including only final result  (synth -top wrapper)
+```
+```
+3.25. Printing statistics.
+
+=== ALU ===
+
+   Number of wires:               2182
+   Number of wire bits:           2880
+   Number of public wires:          39
+   Number of public wire bits:     737
+   Number of ports:                 18
+   Number of port bits:            192
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               2180
+     $_ANDNOT_                     378
+     $_AND_                         62
+     $_MUX_                       1035
+     $_NAND_                        64
+     $_NOR_                        128
+     $_NOT_                        100
+     $_ORNOT_                       85
+     $_OR_                         164
+     $_XNOR_                        68
+     $_XOR_                         96
+
+=== ID ===
+
+   Number of wires:                562
+   Number of wire bits:            955
+   Number of public wires:          37
+   Number of public wire bits:     430
+   Number of ports:                 16
+   Number of port bits:            262
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                635
+     $_ANDNOT_                     117
+     $_AND_                          3
+     $_MUX_                        421
+     $_NAND_                         9
+     $_NOR_                         17
+     $_NOT_                         11
+     $_ORNOT_                        9
+     $_OR_                          48
+
+=== IF_ID_pipeline ===
+
+   Number of wires:                391
+   Number of wire bits:            515
+   Number of public wires:          37
+   Number of public wire bits:     161
+   Number of ports:                  7
+   Number of port bits:             69
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                459
+     $_ANDNOT_                      32
+     $_MUX_                        160
+     $_NAND_                        32
+     $_NOT_                         34
+     $_OR_                         128
+     $_SDFF_PP0_                    73
+
+=== M1_M2_pipeline ===
+
+   Number of wires:                 17
+   Number of wire bits:            103
+   Number of public wires:          17
+   Number of public wire bits:     103
+   Number of ports:                 14
+   Number of port bits:             38
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 18
+     $_SDFF_PP0_                    18
+
+=== M2_WB_pipeline ===
+
+   Number of wires:                 15
+   Number of wire bits:             93
+   Number of public wires:          15
+   Number of public wire bits:      93
+   Number of ports:                 14
+   Number of port bits:             92
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 40
+     $_SDFF_PP0_                    40
+
+=== forwarding_alu ===
+
+   Number of wires:                108
+   Number of wire bits:            275
+   Number of public wires:          13
+   Number of public wire bits:     180
+   Number of ports:                 10
+   Number of port bits:            177
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                159
+     $_ANDNOT_                       1
+     $_MUX_                        128
+     $_NOR_                          1
+     $_NOT_                          1
+     $_OR_                          18
+     $_XOR_                         10
+
+=== id_mux ===
+
+   Number of wires:                 40
+   Number of wire bits:            346
+   Number of public wires:          40
+   Number of public wire bits:     346
+   Number of ports:                 26
+   Number of port bits:            332
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                165
+     $_ANDNOT_                     165
+
+=== pc_controller ===
+
+   Number of wires:                147
+   Number of wire bits:            420
+   Number of public wires:          23
+   Number of public wire bits:     289
+   Number of ports:                 10
+   Number of port bits:             86
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                139
+     $_ANDNOT_                      23
+     $_AND_                          5
+     $_MUX_                         24
+     $_NAND_                         9
+     $_NOR_                         14
+     $_NOT_                          1
+     $_ORNOT_                        3
+     $_OR_                           9
+     $_SDFF_PP0_                     8
+     $_XNOR_                        18
+     $_XOR_                         25
+
+=== reg_file ===
+
+   Number of wires:               9454
+   Number of wire bits:          11616
+   Number of public wires:          55
+   Number of public wire bits:    1225
+   Number of ports:                 18
+   Number of port bits:            227
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              11480
+     $_ANDNOT_                    2149
+     $_AND_                          2
+     $_MUX_                       5958
+     $_NAND_                        60
+     $_NOR_                          1
+     $_NOT_                          7
+     $_ORNOT_                       85
+     $_OR_                        2193
+     $_SDFF_PP0_                  1025
+
+=== stall_unit ===
+
+   Number of wires:                 37
+   Number of wire bits:             49
+   Number of public wires:           8
+   Number of public wire bits:      20
+   Number of ports:                  6
+   Number of port bits:             18
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 30
+     $_ANDNOT_                       7
+     $_MUX_                          1
+     $_NOR_                          2
+     $_OR_                          10
+     $_XNOR_                         1
+     $_XOR_                          9
+
+=== top ===
+
+   Number of wires:                184
+   Number of wire bits:           1749
+   Number of public wires:         149
+   Number of public wire bits:    1714
+   Number of ports:                 17
+   Number of port bits:            220
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                762
+     $_ANDNOT_                      15
+     $_AND_                        714
+     $_MUX_                          5
+     $_NAND_                         5
+     $_NOR_                          2
+     $_ORNOT_                        1
+     $_OR_                          10
+     ALU                             1
+     ID                              1
+     IF_ID_pipeline                  1
+     M1_M2_pipeline                  1
+     M2_WB_pipeline                  1
+     forwarding_alu                  1
+     id_mux                          1
+     pc_controller                   1
+     reg_file                        1
+     stall_unit                      1
+
+=== uart_rx ===
+
+   Number of wires:                118
+   Number of wire bits:            183
+   Number of public wires:          14
+   Number of public wire bits:      47
+   Number of ports:                  7
+   Number of port bits:             14
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                161
+     $_ANDNOT_                      27
+     $_AND_                          9
+     $_DFF_P_                        4
+     $_NAND_                         7
+     $_NOR_                          3
+     $_NOT_                          3
+     $_ORNOT_                       14
+     $_OR_                          41
+     $_SDFFE_PN0N_                   1
+     $_SDFFE_PN0P_                   8
+     $_SDFFE_PN1P_                   2
+     $_SDFFE_PP0P_                  26
+     $_XOR_                         16
+
+=== wrapper ===
+
+   Number of wires:                 97
+   Number of wire bits:            392
+   Number of public wires:          32
+   Number of public wire bits:     319
+   Number of ports:                 11
+   Number of port bits:             26
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                114
+     $_ANDNOT_                      12
+     $_AND_                          1
+     $_DFF_P_                       12
+     $_MUX_                          4
+     $_NAND_                        19
+     $_NOR_                          1
+     $_NOT_                          5
+     $_ORNOT_                        2
+     $_OR_                          23
+     $_SDFFE_PN0N_                   2
+     $_SDFFE_PN0P_                  27
+     $_SDFF_PP1_                     1
+     $_XOR_                          3
+     top                             1
+     uart_rx                         1
+
+=== design hierarchy ===
+
+   wrapper                           1
+     top                             1
+       ALU                           1
+       ID                            1
+       IF_ID_pipeline                1
+       M1_M2_pipeline                1
+       M2_WB_pipeline                1
+       forwarding_alu                1
+       id_mux                        1
+       pc_controller                 1
+       reg_file                      1
+       stall_unit                    1
+     uart_rx                         1
+
+   Number of wires:              13352
+   Number of wire bits:          19576
+   Number of public wires:         479
+   Number of public wire bits:    5664
+   Number of ports:                174
+   Number of port bits:           1753
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              16330
+     $_ANDNOT_                    2926
+     $_AND_                        796
+     $_DFF_P_                       16
+     $_MUX_                       7736
+     $_NAND_                       205
+     $_NOR_                        169
+     $_NOT_                        162
+     $_ORNOT_                      199
+     $_OR_                        2644
+     $_SDFFE_PN0N_                   3
+     $_SDFFE_PN0P_                  35
+     $_SDFFE_PN1P_                   2
+     $_SDFFE_PP0P_                  26
+     $_SDFF_PP0_                  1164
+     $_SDFF_PP1_                     1
+     $_XNOR_                        87
+     $_XOR_                        159
+
+3.26. Executing CHECK pass (checking for obvious problems).
+Checking module ALU...
+Checking module ID...
+Checking module IF_ID_pipeline...
+Checking module M1_M2_pipeline...
+Checking module M2_WB_pipeline...
+Checking module forwarding_alu...
+Checking module id_mux...
+Checking module pc_controller...
+Checking module reg_file...
+Checking module stall_unit...
+Checking module top...
+Checking module uart_rx...
+Checking module wrapper...
+Found and reported 0 problems.
+```
+```
+Including only final result  (synth -top wrapper  abc -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib)
 ```
 ```
 ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:        2
@@ -145,12 +484,13 @@ Dumping module `\wrapper'.
 yosys> 
 ```
 
-
-
 ### To run the GLS simulation:
 
 est synth_processor_test.v testbench.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
 
+show wrapper
+
+![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/86996d27-4bf6-4742-af63-0bc6e2409127)
 
 
 
