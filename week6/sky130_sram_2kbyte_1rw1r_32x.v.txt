@@ -1,0 +1,328 @@
+    module sky130_sram_2kbyte_1rw1r_32x256_8_inst(
+    `ifdef USE_POWER_PINS
+        vccd1,
+        vssd1,
+    `endif
+    // Port 0: RW
+        clk0,csb0,web0,wmask0,addr0,din0,dout0,
+    // Port 1: R
+        clk1,csb1,addr1,dout1
+    );
+
+    parameter NUM_WMASKS = 4 ;
+    parameter DATA_WIDTH = 32 ;
+    parameter ADDR_WIDTH = 8 ;
+    parameter RAM_DEPTH = 1 << ADDR_WIDTH;
+    // FIXME: This delay is arbitrary.
+    parameter DELAY = 0 ;
+    parameter VERBOSE = 0 ; //Set to 0 to only display warnings
+    parameter T_HOLD = 0 ; //Delay to hold dout value after posedge. Value is arbitrary
+
+    `ifdef USE_POWER_PINS
+        inout vccd1;
+        inout vssd1;
+    `endif
+    input  clk0; // clock
+    input   csb0; // active low chip select
+    input  web0; // active low write control
+    input [NUM_WMASKS-1:0]   wmask0; // write mask
+    input [ADDR_WIDTH-1:0]  addr0;
+    input [DATA_WIDTH-1:0]  din0;
+    output [DATA_WIDTH-1:0] dout0;
+    input  clk1; // clock
+    input   csb1; // active low chip select
+    input [ADDR_WIDTH-1:0]  addr1;
+    output [DATA_WIDTH-1:0] dout1;
+
+    reg  csb0_reg;
+    reg  web0_reg;
+    reg [NUM_WMASKS-1:0]   wmask0_reg;
+    reg [ADDR_WIDTH-1:0]  addr0_reg;
+    reg [DATA_WIDTH-1:0]  din0_reg;
+    reg [DATA_WIDTH-1:0]  dout0;
+
+    // All inputs are registers
+    always @(posedge clk0)
+    begin
+        csb0_reg = csb0;
+        web0_reg = web0;
+        wmask0_reg = wmask0;
+        addr0_reg = addr0;
+        din0_reg = din0;
+        #(T_HOLD) dout0 = 32'bx;
+        // if ( !csb0_reg && web0_reg && VERBOSE ) 
+        //   $display($time," Reading %m addr0=%b dout0=%b",addr0_reg,mem[addr0_reg]);
+        // if ( !csb0_reg && !web0_reg && VERBOSE )
+        //   $display($time," Writing %m addr0=%b din0=%b wmask0=%b",addr0_reg,din0_reg,wmask0_reg);
+    end
+
+    reg  csb1_reg;
+    reg [ADDR_WIDTH-1:0]  addr1_reg;
+    reg [DATA_WIDTH-1:0]  dout1;
+
+    // All inputs are registers
+    always @(posedge clk1)
+    begin
+        csb1_reg = csb1;
+        addr1_reg = addr1;
+        // if (!csb0 && !web0 && !csb1 && (addr0 == addr1))
+        //      $display($time," WARNING: Writing and reading addr0=%b and addr1=%b simultaneously!",addr0,addr1);
+        #(T_HOLD) dout1 = 32'bx;
+        // if ( !csb1_reg && VERBOSE ) 
+        //   $display($time," Reading %m addr1=%b dout1=%b",addr1_reg,mem[addr1_reg]);
+    end
+
+    reg [DATA_WIDTH-1:0]    mem [0:RAM_DEPTH-1];
+
+    initial
+    begin
+
+    	mem[0] = 32'h00000000;
+	mem[1] = 32'h00000000;
+	mem[2] = 32'hfe010113;
+	mem[3] = 32'h00112e23;
+	mem[4] = 32'h00812c23;
+	mem[5] = 32'h02010413;
+	mem[6] = 32'hfe042623;
+	mem[7] = 32'hfe042423;
+	mem[8] = 32'hfec42703;
+	mem[9] = 32'h19000793;
+	mem[10] = 32'h04e7ca63;
+	mem[11] = 32'h000207b7;
+	mem[12] = 32'h00078513;
+	mem[13] = 32'h0cc000ef;
+	mem[14] = 32'h00200513;
+	mem[15] = 32'h198000ef;
+	mem[16] = 32'h00000793;
+	mem[17] = 32'h00078513;
+	mem[18] = 32'h0b8000ef;
+	mem[19] = 32'hfe840713;
+	mem[20] = 32'hfec40793;
+	mem[21] = 32'h00070593;
+	mem[22] = 32'h00078513;
+	mem[23] = 32'h1e4000ef;
+	mem[24] = 32'hfe842703;
+	mem[25] = 32'h18f00793;
+	mem[26] = 32'hfce7d2e3;
+	mem[27] = 32'hfe842703;
+	mem[28] = 32'h25800793;
+	mem[29] = 32'hfae7cce3;
+	mem[30] = 32'hfa9ff06f;
+	mem[31] = 32'h00300513;
+	mem[32] = 32'h154000ef;
+	mem[33] = 32'hf9dff06f;
+	mem[34] = 32'hfd010113;
+	mem[35] = 32'h02812623;
+	mem[36] = 32'h03010413;
+	mem[37] = 32'hfca42e23;
+	mem[38] = 32'hfff807b7;
+	mem[39] = 32'hfff78793;
+	mem[40] = 32'hfef42623;
+	mem[41] = 32'hfdc42783;
+	mem[42] = 32'hfec42703;
+	mem[43] = 32'h00ef7f33;
+	mem[44] = 32'h00ff6f33;
+	mem[45] = 32'h00000013;
+	mem[46] = 32'h02c12403;
+	mem[47] = 32'h03010113;
+	mem[48] = 32'h00008067;
+	mem[49] = 32'hfd010113;
+	mem[50] = 32'h02812623;
+	mem[51] = 32'h03010413;
+	mem[52] = 32'hfca42e23;
+	mem[53] = 32'hfffc07b7;
+	mem[54] = 32'hfff78793;
+	mem[55] = 32'hfef42623;
+	mem[56] = 32'hfdc42783;
+	mem[57] = 32'hfec42703;
+	mem[58] = 32'h00ef7f33;
+	mem[59] = 32'h00ff6f33;
+	mem[60] = 32'h00000013;
+	mem[61] = 32'h02c12403;
+	mem[62] = 32'h03010113;
+	mem[63] = 32'h00008067;
+	mem[64] = 32'hfd010113;
+	mem[65] = 32'h02812623;
+	mem[66] = 32'h03010413;
+	mem[67] = 32'hfca42e23;
+	mem[68] = 32'hfffe07b7;
+	mem[69] = 32'hfff78793;
+	mem[70] = 32'hfef42623;
+	mem[71] = 32'hfdc42783;
+	mem[72] = 32'hfec42703;
+	mem[73] = 32'h00ef7f33;
+	mem[74] = 32'h00ff6f33;
+	mem[75] = 32'h00000013;
+	mem[76] = 32'h02c12403;
+	mem[77] = 32'h03010113;
+	mem[78] = 32'h00008067;
+	mem[79] = 32'hfd010113;
+	mem[80] = 32'h02812623;
+	mem[81] = 32'h03010413;
+	mem[82] = 32'hfca42e23;
+	mem[83] = 32'hefff07b7;
+	mem[84] = 32'hfff78793;
+	mem[85] = 32'hfef42623;
+	mem[86] = 32'hfdc42783;
+	mem[87] = 32'hfec42703;
+	mem[88] = 32'h00ef7f33;
+	mem[89] = 32'h00ff6f33;
+	mem[90] = 32'h00000013;
+	mem[91] = 32'h00078513;
+	mem[92] = 32'h02c12403;
+	mem[93] = 32'h03010113;
+	mem[94] = 32'h00008067;
+	mem[95] = 32'hfe010113;
+	mem[96] = 32'h00812e23;
+	mem[97] = 32'h02010413;
+	mem[98] = 32'h010f5513;
+	mem[99] = 32'h00157793;
+	mem[100] = 32'hfef42623;
+	mem[101] = 32'hfec42783;
+	mem[102] = 32'h00078513;
+	mem[103] = 32'h01c12403;
+	mem[104] = 32'h02010113;
+	mem[105] = 32'h00008067;
+	mem[106] = 32'hfe010113;
+	mem[107] = 32'h00812e23;
+	mem[108] = 32'h02010413;
+	mem[109] = 32'h000f5513;
+	mem[110] = 32'h0ff57793;
+	mem[111] = 32'hfef42623;
+	mem[112] = 32'hfec42783;
+	mem[113] = 32'h00078513;
+	mem[114] = 32'h01c12403;
+	mem[115] = 32'h02010113;
+	mem[116] = 32'h00008067;
+	mem[117] = 32'hfd010113;
+	mem[118] = 32'h02812623;
+	mem[119] = 32'h03010413;
+	mem[120] = 32'hfca42e23;
+	mem[121] = 32'hfe042623;
+	mem[122] = 32'h0140006f;
+	mem[123] = 32'h00000013;
+	mem[124] = 32'hfec42783;
+	mem[125] = 32'h00178793;
+	mem[126] = 32'hfef42623;
+	mem[127] = 32'hfdc42683;
+	mem[128] = 32'h00068713;
+	mem[129] = 32'h00571793;
+	mem[130] = 32'h00078713;
+	mem[131] = 32'h40d70733;
+	mem[132] = 32'h00671793;
+	mem[133] = 32'h40e787b3;
+	mem[134] = 32'h00379793;
+	mem[135] = 32'h00d787b3;
+	mem[136] = 32'h00679793;
+	mem[137] = 32'h00078713;
+	mem[138] = 32'hfec42783;
+	mem[139] = 32'hfce7c0e3;
+	mem[140] = 32'h00000013;
+	mem[141] = 32'h02c12403;
+	mem[142] = 32'h03010113;
+	mem[143] = 32'h00008067;
+	mem[144] = 32'hfd010113;
+	mem[145] = 32'h02112623;
+	mem[146] = 32'h02812423;
+	mem[147] = 32'h03010413;
+	mem[148] = 32'hfca42e23;
+	mem[149] = 32'hfcb42c23;
+	mem[150] = 32'h000807b7;
+	mem[151] = 32'h00078513;
+	mem[152] = 32'he29ff0ef;
+	mem[153] = 32'h00000793;
+	mem[154] = 32'h00078513;
+	mem[155] = 32'he1dff0ef;
+	mem[156] = 32'h000807b7;
+	mem[157] = 32'h00078513;
+	mem[158] = 32'he11ff0ef;
+	mem[159] = 32'h00000013;
+	mem[160] = 32'hefdff0ef;
+	mem[161] = 32'hfea42423;
+	mem[162] = 32'h00100793;
+	mem[163] = 32'hfe842703;
+	mem[164] = 32'hfef706e3;
+	mem[165] = 32'hfe042623;
+	mem[166] = 32'h0940006f;
+	mem[167] = 32'hfec42783;
+	mem[168] = 32'h02079863;
+	mem[169] = 32'h000407b7;
+	mem[170] = 32'h00078513;
+	mem[171] = 32'he19ff0ef;
+	mem[172] = 32'hef9ff0ef;
+	mem[173] = 32'h00050713;
+	mem[174] = 32'hfdc42783;
+	mem[175] = 32'h00e7a023;
+	mem[176] = 32'h00000793;
+	mem[177] = 32'h00078513;
+	mem[178] = 32'hdfdff0ef;
+	mem[179] = 32'h0540006f;
+	mem[180] = 32'hfec42703;
+	mem[181] = 32'h00100793;
+	mem[182] = 32'h02f71863;
+	mem[183] = 32'h000407b7;
+	mem[184] = 32'h00078513;
+	mem[185] = 32'hde1ff0ef;
+	mem[186] = 32'hec1ff0ef;
+	mem[187] = 32'h00050713;
+	mem[188] = 32'hfd842783;
+	mem[189] = 32'h00e7a023;
+	mem[190] = 32'h00000793;
+	mem[191] = 32'h00078513;
+	mem[192] = 32'hdc5ff0ef;
+	mem[193] = 32'h01c0006f;
+	mem[194] = 32'h000407b7;
+	mem[195] = 32'h00078513;
+	mem[196] = 32'hdb5ff0ef;
+	mem[197] = 32'h00000793;
+	mem[198] = 32'h00078513;
+	mem[199] = 32'hda9ff0ef;
+	mem[200] = 32'hfec42783;
+	mem[201] = 32'h00178793;
+	mem[202] = 32'hfef42623;
+	mem[203] = 32'hfec42703;
+	mem[204] = 32'h00700793;
+	mem[205] = 32'hf6e7d4e3;
+	mem[206] = 32'h00000013;
+	mem[207] = 32'h02c12083;
+	mem[208] = 32'h02812403;
+	mem[209] = 32'h03010113;
+	mem[210] = 32'h00008067;
+	mem[211] = 32'hffffffff;
+	mem[212] = 32'hffffffff;
+
+    end
+
+    // Memory Write Block Port 0
+    // Write Operation : When web0 = 0, csb0 = 0
+    always @ (negedge clk0)
+    begin : MEM_WRITE0
+        if ( !csb0_reg && !web0_reg ) begin
+            if (wmask0_reg[0])
+                    mem[addr0_reg][7:0] = din0_reg[7:0];
+            if (wmask0_reg[1])
+                    mem[addr0_reg][15:8] = din0_reg[15:8];
+            if (wmask0_reg[2])
+                    mem[addr0_reg][23:16] = din0_reg[23:16];
+            if (wmask0_reg[3])
+                    mem[addr0_reg][31:24] = din0_reg[31:24];
+        end
+    end
+
+    // Memory Read Block Port 0
+    // Read Operation : When web0 = 1, csb0 = 0
+    always @ (negedge clk0)
+    begin : MEM_READ0
+        if (!csb0_reg && web0_reg)
+        dout0 = #(DELAY) mem[addr0_reg];
+    end
+
+    // Memory Read Block Port 1
+    // Read Operation : When web1 = 1, csb1 = 0
+    always @ (negedge clk1)
+    begin : MEM_READ1
+        if (!csb1_reg)
+        dout1 = #(DELAY) mem[addr1_reg];
+    end
+
+    endmodule
