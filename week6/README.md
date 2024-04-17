@@ -484,13 +484,12 @@ Dumping module `\wrapper'.
 yosys> 
 ```
 
-### To run the GLS simulation:
-
-est synth_processor_test.v testbench.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
-
 show wrapper
 
 ![image](https://github.com/joses-bot/vsdiat_workshop/assets/83429049/86996d27-4bf6-4742-af63-0bc6e2409127)
+
+
+
 
 
 
